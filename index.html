@@ -2,17 +2,22 @@
 <html lang="id">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Ramalan Cuaca</title>
 
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
-<footer class="developer">
-    Developer : Kinza
-</footer>
+</head>
 
 
 <body>
@@ -27,7 +32,9 @@
                 🌤️
             </div>
 
-            <h1>Ramalan Cuaca</h1>
+            <h1>
+                Ramalan Cuaca
+            </h1>
 
             <p>
                 Prakiraan cuaca berdasarkan data BMKG
@@ -49,7 +56,10 @@
                     autocomplete="off"
                 >
 
-                <button id="searchButton">
+                <button
+                    id="searchButton"
+                    type="button"
+                >
                     🔍
                 </button>
 
@@ -69,11 +79,13 @@
             id="loading"
             class="loading hidden"
         >
+
             <div class="spinner"></div>
 
             <span id="loadingText">
                 Memuat...
             </span>
+
         </div>
 
 
@@ -85,7 +97,7 @@
         ></div>
 
 
-        <!-- HASIL SEARCH -->
+        <!-- SEARCH RESULTS -->
 
         <section
             id="results"
@@ -93,7 +105,7 @@
         ></section>
 
 
-        <!-- WEATHER -->
+        <!-- WEATHER CARD -->
 
         <section
             id="weatherCard"
@@ -137,10 +149,15 @@
                 <div class="temperature-box">
 
                     <div class="temperature">
+
                         <span id="temperature">
                             -
                         </span>
-                        <sup>°C</sup>
+
+                        <sup>
+                            °C
+                        </sup>
+
                     </div>
 
                     <div
@@ -155,7 +172,7 @@
             </div>
 
 
-            <!-- WEATHER DETAILS -->
+            <!-- DETAILS -->
 
             <div class="details">
 
@@ -164,13 +181,19 @@
                     <span>💧</span>
 
                     <div>
-                        <small>Kelembapan</small>
+
+                        <small>
+                            Kelembapan
+                        </small>
 
                         <strong>
+
                             <span id="humidity">
                                 -
                             </span>%
+
                         </strong>
+
                     </div>
 
                 </div>
@@ -181,14 +204,21 @@
                     <span>💨</span>
 
                     <div>
-                        <small>Kecepatan Angin</small>
+
+                        <small>
+                            Kecepatan Angin
+                        </small>
 
                         <strong>
+
                             <span id="wind">
                                 -
                             </span>
+
                             km/jam
+
                         </strong>
+
                     </div>
 
                 </div>
@@ -199,11 +229,15 @@
                     <span>🧭</span>
 
                     <div>
-                        <small>Arah Angin</small>
+
+                        <small>
+                            Arah Angin
+                        </small>
 
                         <strong id="windDirection">
                             -
                         </strong>
+
                     </div>
 
                 </div>
@@ -214,11 +248,15 @@
                     <span>👁️</span>
 
                     <div>
-                        <small>Jarak Pandang</small>
+
+                        <small>
+                            Jarak Pandang
+                        </small>
 
                         <strong id="visibility">
                             -
                         </strong>
+
                     </div>
 
                 </div>
@@ -311,16 +349,37 @@
             <div class="source">
 
                 Data prakiraan:
-                <strong>BMKG</strong>
+                <strong>
+                    BMKG
+                </strong>
 
             </div>
 
         </section>
 
+
+        <!-- DEVELOPER -->
+
+        <footer class="developer">
+            Developer : Kinza
+        </footer>
+
     </main>
 
 
+    <!-- MAIN JAVASCRIPT -->
+
     <script src="script.js"></script>
+
+
+    <!-- CLOUDFLARE WEB ANALYTICS -->
+
+    <script
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token":"a17c3f3be3c94ed29dc7af1331e0bc5e"}'>
+    </script>
+
 
 </body>
 
