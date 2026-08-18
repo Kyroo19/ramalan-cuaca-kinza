@@ -1,0 +1,1090 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    min-height: 100vh;
+
+    color: #eaf4ff;
+
+    padding: 40px 20px;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(56, 189, 248, 0.28),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(37, 99, 235, 0.35),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(14, 116, 144, 0.35),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #06152e 0%,
+            #082a55 45%,
+            #064e78 100%
+        );
+
+    background-attachment: fixed;
+}
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.container {
+    width: min(920px, 100%);
+    margin: auto;
+
+    padding: 28px;
+
+    border-radius: 32px;
+
+    background:
+        rgba(7, 30, 62, 0.55);
+
+    backdrop-filter: blur(25px);
+
+    border:
+        1px solid rgba(125, 211, 252, 0.14);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.logo {
+    width: 68px;
+    height: 68px;
+
+    margin: 0 auto 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 22px;
+
+    font-size: 34px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #eaf2ff
+        );
+
+    box-shadow:
+        0 12px 30px rgba(37, 99, 235, 0.12);
+
+    border: 1px solid rgba(255,255,255,0.8);
+}
+
+.header h1 {
+    font-size: clamp(28px, 5vw, 42px);
+
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+
+    color: #111827;
+}
+
+.header p {
+    margin-top: 8px;
+
+    color: #64748b;
+
+    font-size: 15px;
+}
+
+
+/* =========================================
+   SEARCH SECTION
+========================================= */
+
+.search-section {
+    margin-bottom: 22px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+
+    padding: 7px;
+
+    background:
+        rgba(2, 18, 40, 0.72);
+
+    backdrop-filter: blur(20px);
+
+    border:
+        1px solid rgba(125, 211, 252, 0.18);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.25);
+}
+
+.search-box input {
+    color: white;
+}
+
+.search-box input::placeholder {
+    color: #7fa4c9;
+}
+
+
+/* =========================================
+   RESULTS
+========================================= */
+
+.results {
+    margin-top: 18px;
+
+    padding: 20px;
+
+    border-radius: 26px;
+
+    background: rgba(255,255,255,0.66);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.9);
+
+    box-shadow:
+        0 20px 55px rgba(15,23,42,0.08);
+}
+
+.results h3 {
+    margin-bottom: 15px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    color: #475569;
+}
+
+
+/* =========================================
+   BUBBLE RESULT
+========================================= */
+
+.result-item {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 10px;
+
+    padding: 15px 17px;
+
+    border: 1px solid #e7edf6;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,0.88);
+
+    color: #172033;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    position: relative;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 16px rgba(15,23,42,0.045);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease,
+        background .2s ease;
+}
+
+
+/* icon / bubble */
+
+.result-item::before {
+    content: "📍";
+
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #e0e7ff
+        );
+
+    font-size: 18px;
+}
+
+
+/* teks */
+
+.result-item strong {
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #1e293b;
+}
+
+
+/* hover */
+
+.result-item:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        rgba(99,102,241,0.25);
+
+    background: #ffffff;
+
+    box-shadow:
+        0 12px 28px
+        rgba(37,99,235,0.10);
+}
+
+
+/* arrow */
+
+.result-item::after {
+    content: "›";
+
+    margin-left: auto;
+
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: #64748b;
+
+    background: #f1f5f9;
+
+    font-size: 21px;
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        color .2s ease;
+}
+
+.result-item:hover::after {
+    transform: translateX(3px);
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5
+        );
+}
+
+
+/* kode pos */
+
+.result-item small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 18px;
+
+    margin-top: 16px;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.75);
+
+    color: #64748b;
+
+    box-shadow:
+        0 10px 30px rgba(15,23,42,0.06);
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+
+    border: 3px solid #dbeafe;
+
+    border-top-color: #2563eb;
+
+    animation:
+        spin .7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.error {
+    margin-top: 16px;
+
+    padding: 14px 17px;
+
+    border-radius: 17px;
+
+    color: #991b1b;
+
+    background:
+        #fef2f2;
+
+    border: 1px solid #fecaca;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   WEATHER CARD
+========================================= */
+
+.weather-card {
+    margin-top: 22px;
+
+    padding: 25px;
+
+    border-radius: 28px;
+
+    background:
+        rgba(255,255,255,0.78);
+
+    backdrop-filter: blur(22px);
+
+    border: 1px solid rgba(255,255,255,0.9);
+
+    box-shadow:
+        0 25px 70px
+        rgba(15,23,42,0.09);
+}
+
+
+/* =========================================
+   LOCATION
+========================================= */
+
+.location {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 25px;
+}
+
+.location-icon {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #e0e7ff
+        );
+}
+
+.location h2 {
+    font-size: 20px;
+
+    color: #111827;
+}
+
+.location p {
+    margin-top: 3px;
+
+    font-size: 13px;
+
+    color: #64748b;
+}
+
+
+/* =========================================
+   CURRENT WEATHER
+========================================= */
+
+.current-weather {
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 24px;
+
+    border-radius: 23px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #f5f3ff
+        );
+
+    border: 1px solid #e5e7eb;
+}
+
+.weather-icon {
+    font-size: 58px;
+}
+
+.temperature {
+    font-size: 54px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: -3px;
+
+    color: #111827;
+}
+
+.temperature sup {
+    font-size: 20px;
+
+    vertical-align: top;
+
+    margin-left: 3px;
+}
+
+.description {
+    margin-top: 8px;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   DETAILS
+========================================= */
+
+.details {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 11px;
+
+    margin-top: 16px;
+}
+
+.detail {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 14px;
+
+    border-radius: 17px;
+
+    background: #f8fafc;
+
+    border: 1px solid #eef2f7;
+}
+
+.detail > span {
+    font-size: 20px;
+}
+
+.detail small {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+.detail strong {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #334155;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   ANALYSIS
+========================================= */
+
+.analysis {
+    margin-top: 18px;
+
+    padding: 20px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8fafc,
+            #f1f5f9
+        );
+
+    border: 1px solid #e8edf3;
+}
+
+.analysis h3,
+.forecast h3 {
+    font-size: 15px;
+
+    color: #334155;
+
+    margin-bottom: 15px;
+}
+
+.analysis-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+}
+
+.analysis-item {
+    text-align: center;
+
+    padding: 15px 10px;
+
+    border-radius: 17px;
+
+    background: white;
+
+    border: 1px solid #edf1f5;
+}
+
+.analysis-item span {
+    display: block;
+
+    font-size: 22px;
+
+    margin-bottom: 6px;
+}
+
+.analysis-item small {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+.analysis-item strong {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 18px;
+
+    color: #1e293b;
+}
+
+.analysis-text {
+    margin-top: 13px;
+
+    padding: 13px 15px;
+
+    border-radius: 14px;
+
+    background: white;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   FORECAST
+========================================= */
+
+.forecast {
+    margin-top: 20px;
+}
+
+#forecastList {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+}
+
+.forecast-item {
+    padding: 14px;
+
+    border-radius: 17px;
+
+    background: #f8fafc;
+
+    border: 1px solid #edf1f5;
+
+    text-align: center;
+}
+
+.forecast-item strong {
+    display: block;
+
+    font-size: 12px;
+
+    color: #475569;
+}
+
+.forecast-item span {
+    display: block;
+
+    margin-top: 7px;
+}
+
+.forecast-item span:nth-child(2) {
+    font-size: 25px;
+}
+
+.forecast-item span:nth-child(3) {
+    font-weight: 700;
+
+    color: #1e293b;
+}
+
+.forecast-item small {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+
+/* =========================================
+   SOURCE
+========================================= */
+
+.source {
+    margin-top: 20px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #e5e7eb;
+
+    text-align: center;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+}
+
+.source strong {
+    color: #64748b;
+}
+
+
+/* =========================================
+   HIDDEN
+========================================= */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    body {
+        padding: 24px 14px;
+    }
+
+    .results {
+        padding: 15px;
+        border-radius: 22px;
+    }
+
+    .result-item {
+        padding: 13px;
+    }
+
+    .details {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .analysis-grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+    #forecastList {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .weather-card {
+        padding: 18px;
+        border-radius: 23px;
+    }
+
+    .current-weather {
+        padding: 18px;
+    }
+
+    .temperature {
+        font-size: 43px;
+    }
+
+    .weather-icon {
+        font-size: 45px;
+    }
+}
+
+
+@media (max-width: 430px) {
+
+    .header h1 {
+        font-size: 30px;
+    }
+
+    .analysis-grid {
+        gap: 7px;
+    }
+
+    .analysis-item {
+        padding: 12px 5px;
+    }
+
+    .analysis-item span {
+        font-size: 19px;
+    }
+
+    .analysis-item strong {
+        font-size: 15px;
+    }
+
+    .current-weather {
+        gap: 12px;
+    }
+
+    .weather-icon {
+        font-size: 40px;
+    }
+}
+
+/* =========================================
+   FIX SEARCH BAR - BLUE PREMIUM
+========================================= */
+
+.search-box {
+    background: rgba(3, 18, 42, 0.88) !important;
+
+    border: 1px solid rgba(96, 165, 250, 0.28) !important;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+
+    backdrop-filter: blur(20px);
+}
+
+
+/* input jangan punya bubble/background sendiri */
+
+.search-box input {
+    background: transparent !important;
+
+    color: #f0f9ff !important;
+
+    border: none !important;
+
+    outline: none !important;
+
+    box-shadow: none !important;
+}
+
+.search-box input::placeholder {
+    color: #7da2c7 !important;
+}
+
+
+/* tombol search */
+
+.search-box button {
+    background:
+        linear-gradient(
+            135deg,
+            #0ea5e9,
+            #2563eb
+        ) !important;
+
+    border: none !important;
+
+    box-shadow:
+        0 6px 18px rgba(14, 165, 233, 0.3) !important;
+}
+
+
+/* =========================================
+   SEARCH SECTION TEXT
+========================================= */
+
+.search-section > small {
+    color: #8fb4d8 !important;
+}
+
+/* =========================================
+   SEARCH UI - COMPACT & PREMIUM
+========================================= */
+
+.search-section {
+    width: min(650px, 100%);
+    margin: 0 auto 22px;
+}
+
+.search-box {
+    width: 100%;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 5px 6px 5px 16px;
+
+    background: rgba(3, 18, 42, 0.9) !important;
+
+    border: 1px solid rgba(96, 165, 250, 0.25) !important;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.04) !important;
+}
+
+
+/* INPUT */
+
+.search-box input {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 100%;
+
+    padding: 0 10px 0 0;
+
+    background: transparent !important;
+
+    border: none !important;
+
+    outline: none !important;
+
+    box-shadow: none !important;
+
+    color: #f0f9ff !important;
+
+    font-size: 15px;
+}
+
+.search-box input::placeholder {
+    color: #7897b8 !important;
+}
+
+
+/* TOMBOL SEARCH DI UJUNG KANAN */
+
+.search-box button {
+    flex: 0 0 46px;
+
+    width: 46px;
+    height: 46px;
+
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: none !important;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0ea5e9,
+            #2563eb
+        ) !important;
+
+    color: white;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 18px rgba(14,165,233,0.28) !important;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.search-box button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 9px 22px rgba(14,165,233,0.38) !important;
+}
+
+.search-box button:active {
+    transform: scale(.94);
+}
+
+
+/* CONTOH PENCARIAN */
+
+.search-section > small {
+    display: block;
+
+    margin-top: 9px;
+    padding-left: 4px;
+
+    color: #82a8cc !important;
+
+    font-size: 11px;
+
+    text-align: left;
+}
+
+.container {
+    width: min(760px, 100%) !important;
+    padding: 22px !important;
+}
+
+.header {
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 32px;
+}
+
+.developer {
+    text-align: center;
+    margin-top: 28px;
+    padding-bottom: 8px;
+
+    color: rgba(186, 230, 253, 0.65);
+
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}

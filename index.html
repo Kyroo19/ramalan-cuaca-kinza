@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ramalan Cuaca</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<footer class="developer">
+    Developer : Kinza
+</footer>
+
+
+<body>
+
+    <main class="container">
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <div class="logo">
+                🌤️
+            </div>
+
+            <h1>Ramalan Cuaca</h1>
+
+            <p>
+                Prakiraan cuaca berdasarkan data BMKG
+            </p>
+
+        </header>
+
+
+        <!-- SEARCH -->
+
+        <section class="search-section">
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Cari kota atau kabupaten..."
+                    autocomplete="off"
+                >
+
+                <button id="searchButton">
+                    🔍
+                </button>
+
+            </div>
+
+            <small>
+                Contoh: Palembang, Lahat, Lubuklinggau,
+                Banyuasin, Muara Enim
+            </small>
+
+        </section>
+
+
+        <!-- LOADING -->
+
+        <div
+            id="loading"
+            class="loading hidden"
+        >
+            <div class="spinner"></div>
+
+            <span id="loadingText">
+                Memuat...
+            </span>
+        </div>
+
+
+        <!-- ERROR -->
+
+        <div
+            id="error"
+            class="error hidden"
+        ></div>
+
+
+        <!-- HASIL SEARCH -->
+
+        <section
+            id="results"
+            class="results hidden"
+        ></section>
+
+
+        <!-- WEATHER -->
+
+        <section
+            id="weatherCard"
+            class="weather-card hidden"
+        >
+
+            <!-- LOCATION -->
+
+            <div class="location">
+
+                <div class="location-icon">
+                    📍
+                </div>
+
+                <div>
+
+                    <h2 id="locationName">
+                        -
+                    </h2>
+
+                    <p id="locationDetail">
+                        -
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CURRENT WEATHER -->
+
+            <div class="current-weather">
+
+                <div
+                    id="weatherIcon"
+                    class="weather-icon"
+                >
+                    🌤️
+                </div>
+
+                <div class="temperature-box">
+
+                    <div class="temperature">
+                        <span id="temperature">
+                            -
+                        </span>
+                        <sup>°C</sup>
+                    </div>
+
+                    <div
+                        id="weatherDescription"
+                        class="description"
+                    >
+                        -
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- WEATHER DETAILS -->
+
+            <div class="details">
+
+                <div class="detail">
+
+                    <span>💧</span>
+
+                    <div>
+                        <small>Kelembapan</small>
+
+                        <strong>
+                            <span id="humidity">
+                                -
+                            </span>%
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>💨</span>
+
+                    <div>
+                        <small>Kecepatan Angin</small>
+
+                        <strong>
+                            <span id="wind">
+                                -
+                            </span>
+                            km/jam
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>🧭</span>
+
+                    <div>
+                        <small>Arah Angin</small>
+
+                        <strong id="windDirection">
+                            -
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <span>👁️</span>
+
+                    <div>
+                        <small>Jarak Pandang</small>
+
+                        <strong id="visibility">
+                            -
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ANALYSIS -->
+
+            <div class="analysis">
+
+                <h3>
+                    📊 Analisis Cuaca
+                </h3>
+
+                <div class="analysis-grid">
+
+                    <div class="analysis-item">
+
+                        <span>🌧️</span>
+
+                        <small>
+                            Potensi Hujan
+                        </small>
+
+                        <strong id="rainAnalysis">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="analysis-item">
+
+                        <span>⛈️</span>
+
+                        <small>
+                            Potensi Badai
+                        </small>
+
+                        <strong id="stormAnalysis">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="analysis-item">
+
+                        <span>☀️</span>
+
+                        <small>
+                            Kondisi Kering
+                        </small>
+
+                        <strong id="dryAnalysis">
+                            -
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="analysisText"
+                    class="analysis-text"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <!-- FORECAST -->
+
+            <div class="forecast">
+
+                <h3>
+                    🕐 Prakiraan Hari Ini
+                </h3>
+
+                <div id="forecastList"></div>
+
+            </div>
+
+
+            <!-- SOURCE -->
+
+            <div class="source">
+
+                Data prakiraan:
+                <strong>BMKG</strong>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
