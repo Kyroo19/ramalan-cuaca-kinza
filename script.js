@@ -2,15 +2,31 @@
 // RAMALAN CUACA - BMKG
 // ============================================
 
-const searchInput = document.getElementById("searchInput");
-const searchButton = document.getElementById("searchButton");
 
-const results = document.getElementById("results");
-const weatherCard = document.getElementById("weatherCard");
+// ============================================
+// ELEMENT
+// ============================================
 
-const loading = document.getElementById("loading");
-const loadingText = document.getElementById("loadingText");
-const errorBox = document.getElementById("error");
+const searchInput =
+    document.getElementById("searchInput");
+
+const searchButton =
+    document.getElementById("searchButton");
+
+const results =
+    document.getElementById("results");
+
+const weatherCard =
+    document.getElementById("weatherCard");
+
+const loading =
+    document.getElementById("loading");
+
+const loadingText =
+    document.getElementById("loadingText");
+
+const errorBox =
+    document.getElementById("error");
 
 
 // ============================================
@@ -29,52 +45,94 @@ let kelurahan = [];
 
 function parseCSV(text) {
 
-    const lines = text
-        .split(/\r?\n/)
-        .map(line => line.trim())
-        .filter(line => line.length > 0);
+    const lines =
+        text
+            .split(/\r?\n/)
+            .map(line => line.trim())
+            .filter(Boolean);
+
 
     if (lines.length < 2) {
         return [];
     }
 
-    const headers = lines[0]
-        .split(",")
-        .map(header =>
-            header.trim().replace(/^"|"$/g, "")
-        );
+
+    const headers =
+        lines[0]
+            .split(",")
+            .map(header =>
+                header
+                    .trim()
+                    .replace(/^"|"$/g, "")
+            );
+
 
     return lines.slice(1).map(line => {
 
         const values = [];
+
         let current = "";
+
         let insideQuotes = false;
 
-        for (let char of line) {
+
+        for (const char of line) {
 
             if (char === '"') {
-                insideQuotes = !insideQuotes;
+
+                insideQuotes =
+                    !insideQuotes;
+
                 continue;
             }
 
-            if (char === "," && !insideQuotes) {
-                values.push(current.trim());
+
+            if (
+                char === "," &&
+                !insideQuotes
+            ) {
+
+                values.push(
+                    current.trim()
+                );
+
                 current = "";
+
             } else {
+
                 current += char;
+
             }
+
         }
 
-        values.push(current.trim());
+
+        values.push(
+            current.trim()
+        );
+
 
         const object = {};
 
-        headers.forEach((header, index) => {
-            object[header] =
-                (values[index] || "").replace(/^"|"$/g, "");
-        });
+
+        headers.forEach(
+            (header, index) => {
+
+                object[header] =
+                    (
+                        values[index] || ""
+                    )
+                    .replace(
+                        /^"|"$/g,
+                        ""
+                    );
+
+            }
+        );
+
 
         return object;
+
     });
 }
 
@@ -85,17 +143,24 @@ function parseCSV(text) {
 
 async function loadCSV(filename) {
 
-    const response = await fetch(
-        `wilayah/${filename}`
-    );
+    const response =
+        await fetch(
+            `wilayah/${filename}`
+        );
+
 
     if (!response.ok) {
+
         throw new Error(
             `${filename} - HTTP ${response.status}`
         );
+
     }
 
-    const text = await response.text();
+
+    const text =
+        await response.text();
+
 
     return parseCSV(text);
 }
@@ -113,33 +178,51 @@ async function loadDatabase() {
             "Memuat database wilayah..."
         );
 
-        provinsi = await loadCSV(
-            "data-provinsi.csv"
-        );
 
-        kabupaten = await loadCSV(
-            "data-kabupaten.csv"
-        );
+        provinsi =
+            await loadCSV(
+                "data-provinsi.csv"
+            );
 
-        kecamatan = await loadCSV(
-            "data-kecamatan.csv"
-        );
 
-        kelurahan = await loadCSV(
-            "data-kelurahan.csv"
-        );
+        kabupaten =
+            await loadCSV(
+                "data-kabupaten.csv"
+            );
+
+
+        kecamatan =
+            await loadCSV(
+                "data-kecamatan.csv"
+            );
+
+
+        kelurahan =
+            await loadCSV(
+                "data-kelurahan.csv"
+            );
+
 
         console.log(
             "Database berhasil:",
             {
-                provinsi: provinsi.length,
-                kabupaten: kabupaten.length,
-                kecamatan: kecamatan.length,
-                kelurahan: kelurahan.length
+                provinsi:
+                    provinsi.length,
+
+                kabupaten:
+                    kabupaten.length,
+
+                kecamatan:
+                    kecamatan.length,
+
+                kelurahan:
+                    kelurahan.length
             }
         );
 
+
         hideLoading();
+
 
     } catch (error) {
 
@@ -148,11 +231,14 @@ async function loadDatabase() {
             error
         );
 
+
         hideLoading();
+
 
         showError(
             "Gagal memuat database wilayah."
         );
+
     }
 }
 
@@ -168,6 +254,7 @@ function searchWilayah() {
             .trim()
             .toLowerCase();
 
+
     if (!keyword) {
 
         showError(
@@ -177,18 +264,29 @@ function searchWilayah() {
         return;
     }
 
+
     hideError();
 
-    weatherCard.classList.add("hidden");
+
+    weatherCard.classList.add(
+        "hidden"
+    );
+
 
     const hasil =
         kabupaten.filter(item => {
 
             const nama =
-                item.nama_kabupaten
-                    .toLowerCase();
+                String(
+                    item.nama_kabupaten || ""
+                )
+                .toLowerCase();
 
-            return nama.includes(keyword);
+
+            return nama.includes(
+                keyword
+            );
+
         });
 
 
@@ -202,7 +300,9 @@ function searchWilayah() {
     }
 
 
-    tampilkanKabupaten(hasil);
+    tampilkanKabupaten(
+        hasil
+    );
 }
 
 
@@ -214,41 +314,77 @@ function tampilkanKabupaten(data) {
 
     results.innerHTML = "";
 
-    results.classList.remove("hidden");
+    results.classList.remove(
+        "hidden"
+    );
 
 
     const title =
-        document.createElement("h3");
+        document.createElement(
+            "h3"
+        );
+
 
     title.textContent =
         "📍 Pilih Kota / Kabupaten";
 
-    results.appendChild(title);
+
+    results.appendChild(
+        title
+    );
 
 
-    data.slice(0, 20).forEach(kab => {
+    data
+        .slice(0, 20)
+        .forEach(kab => {
 
-        const button =
-            document.createElement("button");
-
-        button.className =
-            "result-item";
-
-        button.innerHTML = `
-            📍 ${kab.nama_kabupaten}
-        `;
+            const button =
+                document.createElement(
+                    "button"
+                );
 
 
-        button.onclick = () => {
-
-            tampilkanKecamatan(kab);
-
-        };
+            button.type =
+                "button";
 
 
-        results.appendChild(button);
+            button.className =
+                "result-item";
 
-    });
+
+            button.innerHTML = `
+                <span class="result-icon">
+                    📍
+                </span>
+
+                <span class="result-content">
+                    <strong>
+                        ${escapeHTML(
+                            kab.nama_kabupaten
+                        )}
+                    </strong>
+                </span>
+
+                <span class="result-arrow">
+                    ›
+                </span>
+            `;
+
+
+            button.onclick = () => {
+
+                tampilkanKecamatan(
+                    kab
+                );
+
+            };
+
+
+            results.appendChild(
+                button
+            );
+
+        });
 }
 
 
@@ -262,6 +398,7 @@ function tampilkanKecamatan(kab) {
         kecamatan.filter(item => {
 
             return (
+
                 item.kode_provinsi ===
                 kab.kode_provinsi
 
@@ -269,15 +406,10 @@ function tampilkanKecamatan(kab) {
 
                 item.kode_kabupaten ===
                 kab.kode_kabupaten
+
             );
 
         });
-
-
-    console.log(
-        "Kecamatan:",
-        hasil
-    );
 
 
     if (hasil.length === 0) {
@@ -292,28 +424,58 @@ function tampilkanKecamatan(kab) {
 
     results.innerHTML = "";
 
-    results.classList.remove("hidden");
+    results.classList.remove(
+        "hidden"
+    );
 
 
     const title =
-        document.createElement("h3");
+        document.createElement(
+            "h3"
+        );
+
 
     title.textContent =
         `🏘️ Kecamatan - ${kab.nama_kabupaten}`;
 
-    results.appendChild(title);
+
+    results.appendChild(
+        title
+    );
 
 
     hasil.forEach(kec => {
 
         const button =
-            document.createElement("button");
+            document.createElement(
+                "button"
+            );
+
+
+        button.type =
+            "button";
+
 
         button.className =
             "result-item";
 
+
         button.innerHTML = `
-            🏘️ ${kec.nama_kecamatan}
+            <span class="result-icon">
+                🏘️
+            </span>
+
+            <span class="result-content">
+                <strong>
+                    ${escapeHTML(
+                        kec.nama_kecamatan
+                    )}
+                </strong>
+            </span>
+
+            <span class="result-arrow">
+                ›
+            </span>
         `;
 
 
@@ -327,7 +489,9 @@ function tampilkanKecamatan(kab) {
         };
 
 
-        results.appendChild(button);
+        results.appendChild(
+            button
+        );
 
     });
 }
@@ -346,6 +510,7 @@ function tampilkanKelurahan(
         kelurahan.filter(item => {
 
             return (
+
                 item.kode_provinsi ===
                 kab.kode_provinsi
 
@@ -358,15 +523,10 @@ function tampilkanKelurahan(
 
                 item.kode_kecamatan ===
                 kec.kode_kecamatan
+
             );
 
         });
-
-
-    console.log(
-        "Kelurahan:",
-        hasil
-    );
 
 
     if (hasil.length === 0) {
@@ -381,35 +541,67 @@ function tampilkanKelurahan(
 
     results.innerHTML = "";
 
-    results.classList.remove("hidden");
+    results.classList.remove(
+        "hidden"
+    );
 
 
     const title =
-        document.createElement("h3");
+        document.createElement(
+            "h3"
+        );
+
 
     title.textContent =
         `🏠 Kelurahan - ${kec.nama_kecamatan}`;
 
-    results.appendChild(title);
+
+    results.appendChild(
+        title
+    );
 
 
     hasil.forEach(kel => {
 
         const button =
-            document.createElement("button");
+            document.createElement(
+                "button"
+            );
+
+
+        button.type =
+            "button";
+
 
         button.className =
             "result-item";
 
 
         button.innerHTML = `
-            <strong>
-                🏠 ${kel.nama_kelurahan}
-            </strong>
+            <span class="result-icon">
+                🏠
+            </span>
 
-            <small>
-                Kode Pos: ${kel.kode_pos || "-"}
-            </small>
+            <span class="result-content">
+
+                <strong>
+                    ${escapeHTML(
+                        kel.nama_kelurahan
+                    )}
+                </strong>
+
+                <small>
+                    Kode Pos:
+                    ${escapeHTML(
+                        kel.kode_pos || "-"
+                    )}
+                </small>
+
+            </span>
+
+            <span class="result-arrow">
+                ›
+            </span>
         `;
 
 
@@ -424,7 +616,9 @@ function tampilkanKelurahan(
         };
 
 
-        results.appendChild(button);
+        results.appendChild(
+            button
+        );
 
     });
 }
@@ -473,16 +667,13 @@ async function ambilCuaca(
     );
 
 
+    hideError();
+
+
     try {
 
         const url =
             `https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=${adm4}`;
-
-
-        console.log(
-            "URL BMKG:",
-            url
-        );
 
 
         const response =
@@ -494,6 +685,7 @@ async function ambilCuaca(
             throw new Error(
                 `BMKG HTTP ${response.status}`
             );
+
         }
 
 
@@ -532,12 +724,13 @@ async function ambilCuaca(
         showError(
             "Gagal mengambil data BMKG."
         );
+
     }
 }
 
 
 // ============================================
-// PILIH DATA WAKTU BMKG
+// PILIH CUACA TERDEKAT
 // ============================================
 
 function pilihCuacaSekarang(data) {
@@ -546,48 +739,60 @@ function pilihCuacaSekarang(data) {
         new Date();
 
 
-    const sorted =
-        [...data].sort(
-            (a, b) =>
-                new Date(a.local_datetime) -
-                new Date(b.local_datetime)
-        );
+    const valid =
+        data
+            .filter(item => {
+
+                const waktu =
+                    new Date(
+                        item.local_datetime
+                    );
 
 
-    // Cari prakiraan yang waktunya
-    // paling dekat dengan waktu sekarang
+                return (
+                    !isNaN(
+                        waktu.getTime()
+                    ) &&
+                    waktu >= sekarang
+                );
 
-    let terbaik = sorted[0];
-
-    let jarakTerkecil =
-        Infinity;
-
-
-    sorted.forEach(item => {
-
-        const waktu =
-            new Date(
-                item.local_datetime
+            })
+            .sort(
+                (a, b) =>
+                    new Date(
+                        a.local_datetime
+                    ) -
+                    new Date(
+                        b.local_datetime
+                    )
             );
 
 
-        const jarak =
-            Math.abs(
-                waktu - sekarang
-            );
+    // Kalau masih ada forecast
+    // yang belum lewat
+
+    if (valid.length > 0) {
+
+        return valid[0];
+
+    }
 
 
-        if (jarak < jarakTerkecil) {
+    // Fallback:
+    // ambil data paling akhir
 
-            jarakTerkecil = jarak;
-
-            terbaik = item;
-        }
-
-    });
-
-
-    return terbaik;
+    return (
+        [...data]
+            .sort(
+                (a, b) =>
+                    new Date(
+                        b.local_datetime
+                    ) -
+                    new Date(
+                        a.local_datetime
+                    )
+            )[0]
+    );
 }
 
 
@@ -603,7 +808,10 @@ function tampilkanCuaca(
 ) {
 
     const semuaCuaca =
-        data?.data?.[0]?.cuaca?.flat();
+        data
+            ?.data?.[0]
+            ?.cuaca
+            ?.flat();
 
 
     if (
@@ -625,48 +833,30 @@ function tampilkanCuaca(
         );
 
 
-    console.log(
-        "================================"
-    );
+    if (!cuaca) {
+
+        showError(
+            "Data cuaca tidak tersedia."
+        );
+
+        return;
+    }
+
 
     console.log(
         "WAKTU BMKG:",
         cuaca.local_datetime
     );
 
-    console.log(
-        "SUHU:",
-        cuaca.t
-    );
 
-    console.log(
-        "KELEMBAPAN:",
-        cuaca.hu
-    );
-
-    console.log(
-        "ANGIN:",
-        cuaca.ws
-    );
-
-    console.log(
-        "ARAH:",
-        cuaca.wd
-    );
-
-    console.log(
-        "CUACA:",
-        cuaca.weather_desc
-    );
-
-    console.log(
-        "================================"
-    );
-
+    // ========================================
+    // UI
+    // ========================================
 
     results.classList.add(
         "hidden"
     );
+
 
     weatherCard.classList.remove(
         "hidden"
@@ -790,6 +980,11 @@ function buatAnalisis(data) {
         data.length;
 
 
+    if (!total) {
+        return;
+    }
+
+
     const hujan =
         data.filter(item =>
             /hujan|gerimis/i.test(
@@ -859,16 +1054,12 @@ function buatAnalisis(data) {
         analisis =
             "⛈️ Ada periode prakiraan dengan potensi petir. Tetap perhatikan perubahan cuaca.";
 
-    }
-
-    else if (hujanPersen >= 50) {
+    } else if (hujanPersen >= 50) {
 
         analisis =
             "🌧️ Potensi hujan cukup tinggi pada periode prakiraan.";
 
-    }
-
-    else if (keringPersen >= 60) {
+    } else if (keringPersen >= 60) {
 
         analisis =
             "☀️ Kondisi cenderung cerah dan kering.";
@@ -884,61 +1075,281 @@ function buatAnalisis(data) {
 
 
 // ============================================
-// FORECAST 12 SLOT
+// FORECAST HARI INI + BESOK
 // ============================================
 
 function buatForecast(data) {
 
-    const container =
+    const todayContainer =
         document.getElementById(
-            "forecastList"
+            "forecastToday"
         );
 
+    const tomorrowContainer =
+        document.getElementById(
+            "forecastTomorrow"
+        );
+
+
+    const todayDate =
+        document.getElementById(
+            "todayDate"
+        );
+
+    const tomorrowDate =
+        document.getElementById(
+            "tomorrowDate"
+        );
+
+
+    todayContainer.innerHTML = "";
+
+    tomorrowContainer.innerHTML = "";
+
+
+    const sekarang =
+        new Date();
+
+
+    const besok =
+        new Date(
+            sekarang
+        );
+
+
+    besok.setDate(
+        besok.getDate() + 1
+    );
+
+
+    const todayKey =
+        getDateKey(
+            sekarang
+        );
+
+
+    const tomorrowKey =
+        getDateKey(
+            besok
+        );
+
+
+    // ========================================
+    // PISAH DATA
+    // ========================================
+
+    const forecastToday =
+        data.filter(item => {
+
+            return (
+                getDateKey(
+                    new Date(
+                        item.local_datetime
+                    )
+                ) === todayKey
+            );
+
+        });
+
+
+    const forecastTomorrow =
+        data.filter(item => {
+
+            return (
+                getDateKey(
+                    new Date(
+                        item.local_datetime
+                    )
+                ) === tomorrowKey
+            );
+
+        });
+
+
+    // ========================================
+    // HEADER TANGGAL
+    // ========================================
+
+    todayDate.textContent =
+        formatDate(
+            sekarang
+        );
+
+
+    tomorrowDate.textContent =
+        formatDate(
+            besok
+        );
+
+
+    // ========================================
+    // RENDER
+    // ========================================
+
+    renderForecast(
+        forecastToday,
+        todayContainer,
+        "Belum ada data prakiraan hari ini."
+    );
+
+
+    renderForecast(
+        forecastTomorrow,
+        tomorrowContainer,
+        "Belum ada data prakiraan besok."
+    );
+}
+
+
+// ============================================
+// DATE KEY
+// ============================================
+
+function getDateKey(date) {
+
+    if (
+        !date ||
+        isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return "";
+
+    }
+
+
+    return [
+        date.getFullYear(),
+
+        String(
+            date.getMonth() + 1
+        ).padStart(2, "0"),
+
+        String(
+            date.getDate()
+        ).padStart(2, "0")
+
+    ].join("-");
+}
+
+
+// ============================================
+// FORMAT TANGGAL
+// ============================================
+
+function formatDate(date) {
+
+    return date.toLocaleDateString(
+        "id-ID",
+        {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        }
+    );
+}
+
+
+// ============================================
+// RENDER FORECAST
+// ============================================
+
+function renderForecast(
+    data,
+    container,
+    emptyText
+) {
 
     container.innerHTML = "";
 
 
-    data
-        .slice(0, 12)
-        .forEach(item => {
-
-            const div =
-                document.createElement(
-                    "div"
-                );
-
-
-            div.className =
-                "forecast-item";
-
-
-            div.innerHTML = `
-                <strong>
-                    ${formatTime(
-                        item.local_datetime
-                    )}
-                </strong>
-
-                <span>
-                    ${getIcon(
-                        item.weather_desc
-                    )}
-                </span>
-
-                <span>
-                    ${item.t ?? "-"}°C
-                </span>
-
-                <small>
-                    ${item.weather_desc ?? "-"}
-                </small>
-            `;
-
-
-            container.appendChild(
-                div
+    const sorted =
+        [...data]
+            .filter(item =>
+                item.local_datetime
+            )
+            .sort(
+                (a, b) =>
+                    new Date(
+                        a.local_datetime
+                    ) -
+                    new Date(
+                        b.local_datetime
+                    )
             );
-        });
+
+
+    if (sorted.length === 0) {
+
+        const empty =
+            document.createElement(
+                "div"
+            );
+
+
+        empty.className =
+            "forecast-empty";
+
+
+        empty.textContent =
+            emptyText;
+
+
+        container.appendChild(
+            empty
+        );
+
+
+        return;
+    }
+
+
+    sorted.forEach(item => {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.className =
+            "forecast-item";
+
+
+        div.innerHTML = `
+
+            <strong>
+                ${formatTime(
+                    item.local_datetime
+                )}
+            </strong>
+
+            <span class="forecast-icon">
+                ${getIcon(
+                    item.weather_desc
+                )}
+            </span>
+
+            <span class="forecast-temp">
+                ${item.t ?? "-"}°C
+            </span>
+
+            <small>
+                ${escapeHTML(
+                    item.weather_desc || "-"
+                )}
+            </small>
+
+        `;
+
+
+        container.appendChild(
+            div
+        );
+
+    });
 }
 
 
@@ -949,36 +1360,54 @@ function buatForecast(data) {
 function getIcon(weather) {
 
     const text =
-        String(weather || "")
-            .toLowerCase();
+        String(
+            weather || ""
+        ).toLowerCase();
 
 
     if (
         text.includes("petir") ||
         text.includes("badai")
     ) {
+
         return "⛈️";
+
     }
 
 
     if (
         text.includes("hujan")
     ) {
+
         return "🌧️";
+
+    }
+
+
+    if (
+        text.includes("kabut")
+    ) {
+
+        return "🌫️";
+
     }
 
 
     if (
         text.includes("berawan")
     ) {
+
         return "☁️";
+
     }
 
 
     if (
         text.includes("cerah")
     ) {
+
         return "☀️";
+
     }
 
 
@@ -1001,12 +1430,55 @@ function formatTime(value) {
         new Date(value);
 
 
+    if (
+        isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return "-";
+
+    }
+
+
     return date.toLocaleTimeString(
         "id-ID",
         {
             hour: "2-digit",
             minute: "2-digit"
         }
+    );
+}
+
+
+// ============================================
+// ESCAPE HTML
+// ============================================
+
+function escapeHTML(value) {
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
     );
 }
 
@@ -1080,6 +1552,7 @@ searchInput.addEventListener(
             searchWilayah();
 
         }
+
     }
 );
 
