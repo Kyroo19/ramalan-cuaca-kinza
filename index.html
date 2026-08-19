@@ -10,6 +10,11 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+    <meta
+        name="theme-color"
+        content="#06152e"
+    >
+
     <title>Ramalan Cuaca</title>
 
     <link
@@ -24,7 +29,9 @@
 
     <main class="container">
 
-        <!-- HEADER -->
+        <!-- =====================================
+             HEADER
+        ====================================== -->
 
         <header class="header">
 
@@ -43,7 +50,9 @@
         </header>
 
 
-        <!-- SEARCH -->
+        <!-- =====================================
+             SEARCH
+        ====================================== -->
 
         <section class="search-section">
 
@@ -59,6 +68,7 @@
                 <button
                     id="searchButton"
                     type="button"
+                    aria-label="Cari"
                 >
                     🔍
                 </button>
@@ -73,7 +83,9 @@
         </section>
 
 
-        <!-- LOADING -->
+        <!-- =====================================
+             LOADING
+        ====================================== -->
 
         <div
             id="loading"
@@ -89,15 +101,20 @@
         </div>
 
 
-        <!-- ERROR -->
+        <!-- =====================================
+             ERROR
+        ====================================== -->
 
         <div
             id="error"
             class="error hidden"
+            role="alert"
         ></div>
 
 
-        <!-- SEARCH RESULTS -->
+        <!-- =====================================
+             SEARCH RESULTS
+        ====================================== -->
 
         <section
             id="results"
@@ -105,7 +122,9 @@
         ></section>
 
 
-        <!-- WEATHER CARD -->
+        <!-- =====================================
+             WEATHER CARD
+        ====================================== -->
 
         <section
             id="weatherCard"
@@ -264,7 +283,9 @@
             </div>
 
 
-            <!-- ANALYSIS -->
+            <!-- =================================
+                 ANALYSIS
+            ================================== -->
 
             <div class="analysis">
 
@@ -331,20 +352,83 @@
             </div>
 
 
-            <!-- FORECAST -->
+            <!-- =================================
+                 FORECAST
+            ================================== -->
 
             <div class="forecast">
 
-                <h3>
-                    🕐 Prakiraan Hari Ini
-                </h3>
+                <!-- HARI INI -->
 
-                <div id="forecastList"></div>
+                <section class="forecast-day">
+
+                    <div class="forecast-heading">
+
+                        <div class="forecast-heading-icon">
+                            🕐
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Ramalan Hari Ini
+                            </h3>
+
+                            <small id="todayDate">
+                                -
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="forecastToday"
+                        class="forecast-grid"
+                    ></div>
+
+                </section>
+
+
+                <!-- BESOK -->
+
+                <section class="forecast-day tomorrow">
+
+                    <div class="forecast-heading">
+
+                        <div class="forecast-heading-icon">
+                            🌅
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Ramalan Besok
+                            </h3>
+
+                            <small id="tomorrowDate">
+                                -
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="forecastTomorrow"
+                        class="forecast-grid"
+                    ></div>
+
+                </section>
 
             </div>
 
 
-            <!-- SOURCE -->
+            <!-- =================================
+                 SOURCE
+            ================================== -->
 
             <div class="source">
 
@@ -358,16 +442,25 @@
         </section>
 
 
-        <!-- DEVELOPER -->
+        <!-- =====================================
+             DEVELOPER
+        ====================================== -->
 
         <footer class="developer">
-            Developer : Kinza
+
+            Developer:
+            <strong>
+                Kinza
+            </strong>
+
         </footer>
 
     </main>
 
 
-    <!-- MAIN JAVASCRIPT -->
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
 
     <script src="script.js"></script>
 
@@ -379,7 +472,6 @@
         src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token":"a17c3f3be3c94ed29dc7af1331e0bc5e"}'>
     </script>
-
 
 </body>
 
